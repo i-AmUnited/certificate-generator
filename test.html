@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind config -->
+  <script src="./assets/js/customStyleConfig.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <!-- javaScript -->
+  <script src="./assets/js/previewFxns.js" defer></script>
+  <!-- domToImage -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+</head>
+
+<body class="h-screen p-6 md:p-[150px] grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+  <div class="">
+    <p class="mb-6 font-bold text-xl">Gratitude Challenge Certificate Generator</p>
+
+    <div class="grid gap-4">
+      <div class="grid gap-1">
+        <span class="text-sm">Your full name:</span>
+        <input type="text" class="border w-full p-3 rounded active:outline-0 focus:outline-0 placeholder:text-xs" placeholder="Enter your full name"
+          id="nameInput" oninput="updateName()">
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid gap-1 mb-4">
+          <span class="text-sm">Email address:</span>
+          <input type="text" class="border w-full p-3 rounded active:outline-0 focus:outline-0 placeholder:text-xs" placeholder="Enter your email address...">
+        </div>
+        <div class="grid gap-1 mb-4">
+          <span class="text-sm">Phone number:</span>
+          <input type="text" class="border w-full p-3 rounded active:outline-0 focus:outline-0 placeholder:text-xs" placeholder="Enter your phone number...">
+        </div>
+      </div>
+    </div>
+
+    <button id="screenshotButton" class="p-4 bg-black text-white rounded flex gap-3 items-center text-xs">
+      <span>Download certificate</span>
+      <img src="./assets/images/download.svg" alt="" class="h-5">
+    </button>
+  </div>
+
+  <div class="relative" id="captureDiv">
+    <img src="./assets/images/certificate.jpg" alt="" class="rounded-md">
+    <div class="absolute top-0 w-full h-full flex items-center justify-center pt-4 text-xl" id="displayName">
+      
+    </div>
+  </div>
+</body>
+
+</html>

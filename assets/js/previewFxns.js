@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         displayName.textContent = nameInput.value.trim() || "Your Name...";
     });
 
-    document.getElementById("screenshotButton").addEventListener("click", async () => {
+    document.getElementById("screenshotButton").addEventListener("click", function () {
         const name = nameInput.value.trim();
         const email = document.querySelector("input[placeholder='Enter your email address...']").value.trim();
         const phone = document.querySelector("input[placeholder='Enter your phone number...']").value.trim();
@@ -17,28 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const data = { name, email, phone };
-        const scriptURL = "https://script.google.com/macros/s/AKfycbxEUAmNU9qvKyirstFOQmpRkb3GJM9Hu6H9NmM1tgoh777nBJp-SG0HcDmYdB0rLW5_-Q/exec";
-
-        try {
-            const response = await fetch(scriptURL, {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-
-            const result = await response.json();
-            console.log("Google Sheets Update Success:", result);
-
-            // Take high-resolution screenshot after form submission
-            takeHighResScreenshot(name);
-        } catch (error) {
-            console.error("Google Sheets Submission Failed:", error);
-            alert("Failed to submit data to Google Sheets. Please try again.");
-        }
+        // Take high-resolution screenshot
+        takeHighResScreenshot(name);
     });
 
     function takeHighResScreenshot(userName) {
