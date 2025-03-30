@@ -54,9 +54,9 @@
     </div>
   
     <div class="relative" id="captureDiv">
-        <img src="./assets/images/certificate.jpg" alt="" class="rounded-md">
-        <div class="absolute top-0 w-full h-full flex items-center justify-center pt-4 text-xl text-center" id="displayName">
-            Your name...
+        <img src="./assets/images/certificate.jpg" alt="" class="">
+        <div class="absolute top-0 w-full h-full flex items-center justify-center pt-2 md:pt-4 text-[11px] md:text-xl text-center name-font" id="displayName">
+            Muhammad Abdur-Rasheed
         </div>
     </div>
 
@@ -98,10 +98,10 @@
                 console.log("API Response:", result);
 
                 if (response.ok) {
-                    alert("Your donation has been recorded successfully!");
+                    alert("Your certificate has been generated successfully!");
                     screenshotButton.classList.remove("hidden");
                 } else {
-                    alert("Failed to submit. Please try again.");
+                    alert("Failed to generate certificate. Please try again.");
                 }
             } catch (error) {
                 alert("An error occurred: " + error.message);
