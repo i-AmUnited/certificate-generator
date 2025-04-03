@@ -4,97 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You For Donating!</title>
-    <!-- Bootstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind config -->
+    <script src="./assets/js/customStyleConfig.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./assets/css/style.css" />
     <!-- domToImage -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-
+    <!-- Old English Five Font -->
+    <link href="https://fonts.cdnfonts.com/css/old-english-five" rel="stylesheet">
+    
     <style>
-        /* Custom styles with Bootstrap breakpoints */
-        .name-text {
-            padding-bottom: 0px;
-            padding-top: 5px;
-            font-size: 16px;
-        }
-
-        @media (max-width: 576px) { /* Small screens (sm) */
-            .name-text {
-            padding-bottom: 0px;
-            padding-top: 5px;
-            font-size: 11px; 
-            }
-        }
-
-        @media (min-width: 577px) and (max-width: 992px) { /* Medium screens (md) */
-            .name-text {
-                padding-bottom: 0px;
-                padding-top: 15px;
-            }
-        }
-
-        @media (min-width: 993px) { /* Large screens (lg) */
-            .name-text {
-                padding-bottom: 20px;
-                padding-top: 0px;
-            }
+        .old-english-font {
+            font-family: 'Old English Five', sans-serif;
         }
     </style>
 </head>
-<body class="min-vh-100 d-flex align-items-center p-3">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <img alt="" src="./assets/images/logo.svg" class="mb-4" style="height: 100px;"/>
-                <p class="fw-bold border-top pt-3 fs-5">Gratitude Challenge Certificate Generator</p>
-                <p class="text-muted small">Your generosity during Ramadan has made a real difference! As a token of our appreciation, you can now generate your Certificate of Participation/Donation. <br><br> Thank you for your kindness—may you be abundantly rewarded!</p>
-                
-                <form id="donationForm" class="row g-3">
-                    <div class="col-12">
-                        <label for="fullName" class="form-label">Full Name:</label>
-                        <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Enter your full name" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="emailAddress" class="form-label">Email Address:</label>
-                        <input type="email" id="emailAddress" name="emailAddress" class="form-control" placeholder="Enter your email address" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="phoneNumber" class="form-label">Phone Number:</label>
-                        <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Enter your phone number" required>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" id="submitButton" class="btn btn-dark">Submit</button>
-                    </div>
-                </form>
+<body class="min-h-screen items-center p-6 md:p-[150px] grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <div>
+        <img alt="" src="./assets/images/logo.svg" class="h-24 mb-4"/>
+        <p class="mb-1 font-bold text-lg border-t pt-4">Gratitude Challenge Certificate Generator</p>
+        <p class="text-xs mb-6">Your generosity during Ramadan has made a real difference! As a token of our appreciation, you can now generate your Certificate of Participation/Donation. <br> <br> Thank you for your kindness—may you be abundantly rewarded! </p>
+        
+        <form id="donationForm" class="grid gap-4">
+            <div class="grid gap-1">
+                <label for="fullName" class="text-sm">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" class="border w-full p-3 rounded active:outline-0 focus:outline-0 placeholder:text-xs" placeholder="Enter your full name" required>
             </div>
-            <div class="col-lg-6 position-relative" id="captureDiv">
-                <img src="./assets/images/certificate.jpg" alt="" class="img-fluid">
-                <div class="position-absolute top-50 start-50 translate-middle text-center fw-bold name-font name-text" id="displayName">
-                    your name ...
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid gap-1">
+                <label for="emailAddress" class="text-sm">Email Address:</label>
+                <input type="email" id="emailAddress" name="emailAddress" class="border w-full p-3 rounded active:outline-0 focus:outline-0 placeholder:text-xs" placeholder="Enter your email address" required>
+            </div>
+        
+            <div class="grid gap-1">
+                <label for="phoneNumber" class="text-sm">Phone Number:</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" class="border w-full p-3 rounded active:outline-0 focus:outline-0 placeholder:text-xs" placeholder="Enter your phone number" required>
             </div>
         </div>
-    </div>
-
-    <!-- Bootstrap Modal -->
-    <div class="modal fade" id="certificateModal" tabindex="-1" aria-labelledby="certificateModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="certificateModalLabel">Certificate Generated</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Your certificate has been successfully generated. Click the button below to download it.
-                </div>
-                <div class="modal-footer">
-                    <button id="screenshotButton" class="btn btn-success">
-                        Download Certificate
-                        <img src="./assets/images/download.svg" alt="" class="ms-2" style="height: 20px;">
-                    </button>
-                </div>
+            <div class="hidden">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address">
             </div>
+            
+            <button type="submit" id="submitButton" class="p-4 w-fit bg-black text-white rounded flex gap-3 items-center text-sm">
+                <span>Submit</span>
+            </button>
+        </form>
+    </div>
+  
+    <div class="relative" id="captureDiv">
+        <img src="./assets/images/certificate.jpg" alt="" class="">
+        <div class="absolute top-0 w-full h-full flex items-center justify-center pt-2 md:pt-4 text-[11px] md:text-xl text-center old-english-font" id="displayName">
+            your name.
         </div>
     </div>
 
@@ -105,12 +69,15 @@
             const fullName = document.getElementById("fullName").value.trim();
             const emailAddress = document.getElementById("emailAddress").value.trim();
             const phoneNumber = document.getElementById("phoneNumber").value.trim();
+            const address = document.getElementById("address").value.trim();
             const displayName = document.getElementById("displayName");
             const submitButton = document.getElementById("submitButton");
 
+            // Disable the submit button to prevent multiple submissions
             submitButton.disabled = true;
             submitButton.textContent = "Submitting...";
 
+            // Update certificate preview with the entered name
             displayName.textContent = fullName;
 
             try {
@@ -120,13 +87,19 @@
                         "Content-Type": "application/json",
                         "x-api-key": "21122023"
                     },
-                    body: JSON.stringify({ fullName, emailAddress, phoneNumber })
+                    body: JSON.stringify({
+                        fullName,
+                        emailAddress,
+                        phoneNumber,
+                        address
+                    })
                 });
 
+                const result = await response.json();
+                console.log("API Response:", result);
+
                 if (response.ok) {
-                    new bootstrap.Modal(document.getElementById("certificateModal")).show();
-                } else {
-                    alert("Failed to generate certificate. Please try again.");
+                    document.getElementById("certificateModal").classList.remove("hidden");
                 }
             } catch (error) {
                 alert("An error occurred: " + error.message);
@@ -136,8 +109,7 @@
             }
         });
 
-        // Screenshot functionality (Download Certificate)
-        document.getElementById("screenshotButton").addEventListener("click", function () {
+        function downloadCertificate() {
             const captureDiv = document.getElementById("captureDiv");
             const scaleFactor = 3;
             const width = captureDiv.offsetWidth * scaleFactor;
@@ -151,6 +123,7 @@
                     transformOrigin: "top left",
                     width: captureDiv.offsetWidth + "px",
                     height: captureDiv.offsetHeight + "px",
+                    fontFamily: 'Old English Five, sans-serif'
                 }
             })
             .then(function (blob) {
@@ -164,8 +137,16 @@
             .catch(function (error) {
                 console.error("Error generating high-res image:", error);
             });
-        });
+        }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded text-center">
+            <p class="text-lg mb-4">Your certificate has been generated!</p>
+            <button onclick="downloadCertificate()" class="p-4 bg-green-500 text-white rounded">Download Certificate</button>
+        </div>
+    </div>
+
 </body>
 </html>
